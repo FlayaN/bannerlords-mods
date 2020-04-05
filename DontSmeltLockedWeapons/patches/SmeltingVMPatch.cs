@@ -28,6 +28,11 @@ namespace DontSmeltLockedWeapons.patches
             }
 
             __instance.SmeltableItemList = filteredItemList;
+
+            if (__instance.SmeltableItemList.Count == 0)
+            {
+                __instance.CurrentSelectedItem = null;
+            }
         }
     }
 }
