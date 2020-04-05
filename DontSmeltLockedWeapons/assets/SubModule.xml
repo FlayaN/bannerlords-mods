@@ -1,0 +1,26 @@
+<Module>
+     <Name value="Dont smelt locked weapons"/>
+     <Id value="DontSmeltLockedWeapons"/>
+     <Version value="v1.0.1"/>
+     <SingleplayerModule value="true"/>
+     <MultiplayerModule value="false"/>
+     <DependedModules>
+         <DependedModule Id="Native"/>
+         <DependedModule Id="SandBoxCore"/>
+         <DependedModule Id="Sandbox"/>
+         <DependedModule Id="CustomBattle"/>
+         <DependedModule Id="StoryMode" />
+     </DependedModules>
+     <SubModules>
+         <SubModule>
+             <Name value="DontSmeltLockedWeapons"/>
+             <DLLName value="DontSmeltLockedWeapons.dll"/>
+             <SubModuleClassType value="DontSmeltLockedWeapons.Startup"/>
+             <Tags>
+                 <Tag key="DedicatedServerType" value="none" />
+                 <Tag key="IsNoRenderModeElement" value="false" />
+             </Tags>
+         </SubModule>
+     </SubModules>
+     <Xmls/>
+ </Module>

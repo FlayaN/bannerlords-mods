@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net4.7.2</TargetFramework>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <PlatformTarget>x64</PlatformTarget>
+    <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+    <BannerLordBasePath>E:\Steam\steamapps\common\Mount &amp; Blade II Bannerlord</BannerLordBasePath>
+    <Configurations>Release</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.0.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="TaleWorlds.CampaignSystem">
+      <HintPath>$(BannerLordBasePath)\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.dll</HintPath>
+    </Reference>
+    <Reference Include="TaleWorlds.CampaignSystem.ViewModelCollection">
+      <HintPath>$(BannerLordBasePath)\bin\Win64_Shipping_Client\TaleWorlds.CampaignSystem.ViewModelCollection.dll</HintPath>
+    </Reference>
+    <Reference Include="TaleWorlds.DotNet">
+      <HintPath>$(BannerLordBasePath)\bin\Win64_Shipping_Client\TaleWorlds.DotNet.dll</HintPath>
+    </Reference>
+    <Reference Include="TaleWorlds.MountAndBlade">
+      <HintPath>$(BannerLordBasePath)\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
+    </Reference>
+    <Reference Include="TaleWorlds.Library">
+      <HintPath>$(BannerLordBasePath)\bin\Win64_Shipping_Client\TaleWorlds.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="TaleWorlds.Core">
+      <HintPath>$(BannerLordBasePath)\bin\Win64_Shipping_Client\TaleWorlds.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;assets&quot; &quot;$(BannerLordBasePath)\Modules\$(AssemblyName)&quot; /E /H /C /I&#xD;&#xA;xcopy &quot;bin\Release\net4.7.2\0Harmony.dll&quot; &quot;$(BannerLordBasePath)\Modules\$(AssemblyName)\bin\Win64_Shipping_Client\&quot; /Y /I&#xD;&#xA;xcopy &quot;bin\Release\net4.7.2\$(AssemblyName).dll&quot; &quot;$(BannerLordBasePath)\Modules\$(AssemblyName)\bin\Win64_Shipping_Client\&quot; /Y /I" />
+  </Target>
+
+</Project>
