@@ -11,10 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="StoryMode">
       <HintPath>$(BannerLordBasePath)\Modules\StoryMode\bin\Win64_Shipping_Client\StoryMode.dll</HintPath>
     </Reference>
