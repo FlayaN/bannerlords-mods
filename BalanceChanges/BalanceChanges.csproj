@@ -29,6 +29,9 @@
     <Reference Include="TaleWorlds.MountAndBlade">
       <HintPath>$(BannerLordBasePath)\bin\Win64_Shipping_Client\TaleWorlds.MountAndBlade.dll</HintPath>
     </Reference>
+    <Reference Include="TaleWorlds.Localization">
+      <HintPath>$(BannerLordBasePath)\bin\Win64_Shipping_Client\TaleWorlds.Localization.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
