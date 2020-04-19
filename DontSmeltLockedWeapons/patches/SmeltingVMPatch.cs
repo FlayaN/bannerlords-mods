@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using TaleWorlds.CampaignSystem;
 using TaleWorlds.CampaignSystem.SandBox.CampaignBehaviors;
@@ -7,21 +8,26 @@ using TaleWorlds.Library;
 
 namespace DontSmeltLockedWeapons.patches
 {
-    [HarmonyPatch(typeof(SmeltingVM), "RefreshList")]
+    [HarmonyPatch(typeof(SmeltingVM))]
     public class SmeltingVMPatch
     {
+        [HarmonyPostfix]
+        [HarmonyPatch("RefreshList")]
+        [SuppressMessage("CodeQuality", "IDE0051:Remove unused private members", Justification = "Scanned by harmony")]
         static void Postfix(SmeltingVM __instance)
         {
-            var locks = Campaign.Current.GetCampaignBehavior<InventoryLockTracker>().GetLocks();
+            var lockedItemIds = Campaign.Current.GetCampaignBehavior<InventoryLockTracker>().GetLocks()?.Select(x => x.Item.Id).ToList();
 
-            var items = MobileParty.MainParty.ItemRoster;
+            if(lockedItemIds == null)
+            {
+                return;
+            }
 
             var filteredItemList = new MBBindingList<SmeltingItemVM>();
 
             foreach(var smeltableItem in __instance.SmeltableItemList)
             {
-                var inventoryItem = items.FirstOrDefault(x => x.EquipmentElement.Item.Id == smeltableItem.Item.Id);
-                if(!inventoryItem.IsEmpty && !locks.Contains(inventoryItem))
+                if(!lockedItemIds.Contains(smeltableItem.Item.Id))
                 {
                     filteredItemList.Add(smeltableItem);
                 }
